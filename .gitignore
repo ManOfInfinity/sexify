@@ -1,32 +1,29 @@
-# Wails Build
-build/
-*.exe
-*.dll
-*.dylib
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 *.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Wails Generated Files
-frontend/wailsjs/
-
-# Go
-*.test
-*.out
-go.work
-go.work.sum
-
-# Node / Frontend
-node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.pnpm-store/
-.npm
-.yarn
-*.tsbuildinfo
+# Virtual Environment
+.venv/
+venv/
+ENV/
 
 # IDE / Editors
 .vscode/
@@ -34,9 +31,9 @@ pnpm-debug.log*
 *.swp
 *.swo
 *~
-.DS_Store
 
 # OS
+.DS_Store
 Thumbs.db
 desktop.ini
 
@@ -56,9 +53,8 @@ temp/
 *.bak
 *.old
 
-# Test files
-test
+# Downloads (output folder)
+Downloads/
 
-# Build notes (optional - uncomment if you don't want to commit)
-# BUILD_NOTES.md
-push.bat
+# Poetry
+poetry.lock
