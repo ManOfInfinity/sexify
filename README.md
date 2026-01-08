@@ -243,7 +243,14 @@ Special thanks to the developers and maintainers of these services for making lo
 
 ## ⚠️ Disclaimer
 
-This tool is for **personal use only**. Please support artists by purchasing their music or subscribing to streaming services. The developers are not responsible for any misuse of this software.
+> **Educational Purpose Only**
+
+- This tool is provided for **educational and personal use only**.
+- The developer **does not own, host, or distribute** any copyrighted content.
+- All music is sourced from **third-party APIs and publicly available services** on the internet.
+- The developer is **not responsible** for any copyright infringement, misuse, or legal issues arising from the use of this software.
+- **Please support artists** by purchasing their music or subscribing to official streaming services.
+- By using this software, you agree that you are solely responsible for ensuring compliance with your local laws.
 
 ---
 
