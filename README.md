@@ -195,11 +195,15 @@ spotify:
 
 Spotify is currently not allowing new app creation on their developer dashboard. As a workaround, you can extract a token directly:
 
-1. Go to [developer.spotify.com](https://developer.spotify.com/documentation/web-api)
-2. Open any API example that has a "Run code" button
-3. Open your browser's Developer Tools (F12) → Console
-4. Look for the `token` variable in the JavaScript code (line 2)
-5. Copy the token value and paste it in your `config.yaml`:
+1. Go to [developer.spotify.com](https://developer.spotify.com/) and **Log in**
+2. Scroll down to the "Web API" section (or any example with "Run code")
+3. You'll see an interactive console like this:
+
+   ![Spotify Token Guide](https://raw.githubusercontent.com/ManOfInfinity/wdym/refs/heads/main/uploads/spotify_token.png)
+
+4. Open your browser's Developer Tools (F12) → Console
+5. Look for the `token` variable in the JavaScript code
+6. Copy the token value and paste it in your `config.yaml`:
 
 ```yaml
 spotify:
