@@ -31,6 +31,7 @@ class DownloadRequest:
     cover_url: str = ""
     output_dir: str = "."
     audio_format: str = "LOSSLESS"
+    output_extension: str = "flac"  # auto-set based on quality
     filename_format: str = "{title} - {artist}"
     track_number: int = 0
     total_tracks: int = 0
@@ -95,6 +96,9 @@ class Downloader:
             
         ensure_dir(final_output_dir)
         
+        # Determine file extension based on quality
+        extension = self._get_extension_for_quality(req.audio_format, req.service)
+        
         expected_filename = build_expected_filename(
             req.track_name, req.artist_name, req.album_name, req.album_artist,
             req.release_date, req.filename_format, True, req.position,
@@ -102,8 +106,8 @@ class Downloader:
             False,
             req.service # service_name
         )
-        if not expected_filename.endswith(".flac"):
-            expected_filename += ".flac"
+        if not expected_filename.endswith(f".{extension}"):
+            expected_filename += f".{extension}"
             
         output_path = os.path.join(final_output_dir, expected_filename)
         
@@ -158,6 +162,22 @@ class Downloader:
         log_error(f"- Failed to download: {req.track_name} (all services tried)", 'sexify')
         return False
 
+    def _get_extension_for_quality(self, quality: str, service: str) -> str:
+        """Get the appropriate file extension based on quality and service."""
+        if service == "tidal":
+            # Lossy formats use m4a (AAC container)
+            if quality in ["LOW", "NORMAL", "HIGH"]:
+                return "m4a"
+            # Lossless formats use flac
+            return "flac"
+        elif service == "qobuz":
+            # Quality 5 = MP3 320kbps, others are FLAC
+            if quality == "5":
+                return "mp3"
+            return "flac"
+        # Other services (amazon) default to flac
+        return "flac"
+    
     def _download_tidal(self, req: DownloadRequest, output_path: str) -> bool:
         if not req.spotify_id:
             log_error("No Spotify ID for TIDAL lookup", 'tidal')
@@ -188,12 +208,16 @@ class Downloader:
         
         log_sub("Getting stream URL...", 'tidal')
         
-        # Quality fallback chain for TIDAL
-        quality_chain = [req.audio_format]
-        if req.audio_format == "HI_RES_LOSSLESS":
-            quality_chain.extend(["LOSSLESS", "HIGH"])
-        elif req.audio_format == "LOSSLESS":
-            quality_chain.append("HIGH")
+        # Quality fallback chain for TIDAL (ordered by quality)
+        # HI_RES_LOSSLESS > LOSSLESS > HIGH > NORMAL > LOW
+        quality_hierarchy = ["HI_RES_LOSSLESS", "LOSSLESS", "HIGH", "NORMAL", "LOW"]
+        
+        try:
+            start_idx = quality_hierarchy.index(req.audio_format)
+            quality_chain = quality_hierarchy[start_idx:]
+        except ValueError:
+            # Unknown quality, default to lossless chain
+            quality_chain = [req.audio_format, "LOSSLESS", "HIGH"]
         
         stream_url = None
         for quality in quality_chain:

@@ -30,7 +30,7 @@ include_track_numbers: true
 # │  🎵  SERVICE                                                                 │
 # └──────────────────────────────────────────────────────────────────────────────┘
 
-service: "amazon"
+service: "qobuz"
 #
 #  Options:
 #    • tidal  → Hi-Res FLAC up to 24-bit/192kHz
@@ -46,10 +46,16 @@ service: "amazon"
 # └──────────────────────────────────────────────────────────────────────────────┘
 
 tidal:
-  quality: "HI_RES_LOSSLESS"
+  quality: "HIGH"
   #
-  #  • LOSSLESS        → FLAC 16-bit/44.1kHz (CD Quality)
-  #  • HI_RES_LOSSLESS → FLAC 24-bit/96kHz+ (Hi-Res) ★
+  #  Lossless:
+  #    • HI_RES_LOSSLESS → FLAC 24-bit/96kHz+ (Hi-Res) ★
+  #    • LOSSLESS        → FLAC 16-bit/44.1kHz (CD Quality)
+  #
+  #  Lossy:
+  #    • HIGH            → AAC 320kbps
+  #    • NORMAL          → AAC 160kbps
+  #    • LOW             → AAC 96kbps
 
   # ⚠️  Your TIDAL API credentials
   # Get them → https://developer.tidal.com/
@@ -62,7 +68,7 @@ tidal:
 # └──────────────────────────────────────────────────────────────────────────────┘
 
 qobuz:
-  quality: "27"
+  quality: "5"
   #
   #  •  5 → MP3 320kbps
   #  •  6 → FLAC 16-bit/44.1kHz (CD Quality)
@@ -98,7 +104,7 @@ spotify:
   
   # Optional: Provide a pre-generated access token to bypass client credentials auth
   # If set, client_id/client_secret are ignored
-  token: "BQAJPIR67uNjrGVL0qUbkBcz5pQIYhqD7xbZ014JjhbhfGWzfX3z9MQGLsAym-tKkKQjXGeHfT6y33Ke5nYfy7fBzVsG-Dx0d-4TEx21qpwq52lXv9B3LFhtBRJJCWeNDRQelJwYQITjg7Lcvus38aJ1S6Wk9ZbRbrSJWJJaMFlfG1Z9JzC2W79IqSLNOebzwl1j7yPPgH0kjDEZMsHMWc8rvcH-z4pQZHdEEZtGcd_RMrKmM56B-a1HeGBpMkLYtUInm5c_VITlmVrr-R9myYF6POH_khKiBSAUcxWE2uQCNM4G3gZYcN-CStuNyd82JuHU"
+  token: "BQA62Mq9O_tbV2XbiV252E5r4tofRLXt2vcYhU0wwwiwoZY2boNZbs-D78lrhjAGc-YEulPa4_oG9qIq4GfiSMp_AobyKThkEzYPgaPedU8yTIu2OL2Bx57CTvOu89iNXPUOPVdgpyFs0u8dONkdjp_Qmmt67JVzLltao87OZgBbz4hkKWPU3gQyHva2mJ-h6vTUv5gy59GdgvLL9lGXCnDdkMI1FU9v8hQoJgv1zyFZcTAn4DYle5JL67cM75PaZ5vMOS93LKoBU8au-4dM01qULlhp6Z94xBZ9OfPJBZl7r-Mo-CoEYlNwdrvkV4tKNN-d"
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐

@@ -31,7 +31,7 @@ def cli():
 @cli.command('download', context_settings=CONTEXT_SETTINGS)
 @click.argument('url')
 @click.option('--service', '-s', default=lambda: config.get('service', 'tidal'), help='Download service')
-@click.option('--quality', '-q', default=None, help='Audio quality (LOSSLESS, HI_RES, MP3_320)')
+@click.option('--quality', '-q', default=None, help='Audio quality (HI_RES_LOSSLESS, LOSSLESS, HIGH, NORMAL, LOW)')
 @click.option('--output', '-o', default=lambda: config.get('output_dir'), help='Output directory')
 @click.option('--lyrics/--no-lyrics', default=lambda: config.get('embed_lyrics', True), help='Embed lyrics')
 @click.option('--cover-max/--no-cover-max', default=lambda: config.get('embed_max_quality_cover', True), help='Embed max quality cover')

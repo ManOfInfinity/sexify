@@ -10,7 +10,7 @@
 ![macOS](https://img.shields.io/badge/macOS-✓-000?style=flat-square)
 ![Linux](https://img.shields.io/badge/Linux-✓-FCC624?style=flat-square)
 
-**Download Spotify tracks, albums & playlists in lossless FLAC**  
+**Download Spotify tracks, albums & playlists in FLAC or AAC**  
 *via Tidal, Qobuz & Amazon Music*
 
 </div>
@@ -40,6 +40,7 @@ poetry run sexify analyze ~/Music/downloaded_song.flac
 | Feature | Description |
 |---------|-------------|
 | 🎧 **Lossless FLAC** | 16/24-bit, up to 192kHz |
+| 🎵 **Lossy AAC** | 96/160/320 kbps for smaller files |
 | 🔗 **Spotify URLs** | Tracks, albums, playlists |
 | 🎯 **Multi-Source** | Tidal, Qobuz, Amazon Music with automatic fallback |
 | 📊 **Audio Analysis** | Check sample rate, bit depth, and duration |
@@ -177,7 +178,7 @@ service: "tidal"
 
 # Per-platform settings
 tidal:
-  quality: "HI_RES_LOSSLESS"  # LOSSLESS, HI_RES_LOSSLESS
+  quality: "HI_RES_LOSSLESS"  # See quality options below
 
 qobuz:
   quality: "27"  # 5=MP3, 6=CD, 7=Hi-Res, 27=Hi-Res Max
@@ -209,20 +210,62 @@ spotify:
 
 ---
 
-## 🎛️ Supported Services
+## 🎛️ Supported Services & Quality
 
-| Service | Quality Options | Notes |
-|---------|-----------------|-------|
-| **Tidal** | `LOSSLESS`, `HI_RES_LOSSLESS` | Up to 24-bit/192kHz |
-| **Qobuz** | `5`, `6`, `7`, `27` | `27` = Hi-Res Max (24-bit/192kHz) |
-| **Amazon** | Auto (UHD preferred) | Up to 24-bit/192kHz |
+<div align="center">
 
-### Service Fallback
+### 📊 Complete Quality Reference
+
+</div>
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         🎵 AUDIO QUALITY MATRIX                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  🌊 TIDAL                                                                   │
+│  ├── HI_RES_LOSSLESS  ─────  FLAC 24-bit/96kHz+   ─────  .flac  ⭐ Best    │
+│  ├── LOSSLESS         ─────  FLAC 16-bit/44.1kHz  ─────  .flac  💿 CD      │
+│  ├── HIGH             ─────  AAC  320 kbps        ─────  .m4a              │
+│  ├── NORMAL           ─────  AAC  160 kbps        ─────  .m4a              │
+│  └── LOW              ─────  AAC   96 kbps        ─────  .m4a              │
+│                                                                             │
+│  🎧 QOBUZ                                                                   │
+│  ├── 27               ─────  FLAC 24-bit/192kHz   ─────  .flac  ⭐ Best    │
+│  ├── 7                ─────  FLAC 24-bit/96kHz    ─────  .flac             │
+│  ├── 6                ─────  FLAC 16-bit/44.1kHz  ─────  .flac  💿 CD      │
+│  └── 5                ─────  MP3  320 kbps        ─────  .mp3              │
+│                                                                             │
+│  🛒 AMAZON MUSIC                                                            │
+│  └── Auto             ─────  FLAC 24-bit/192kHz   ─────  .flac  ⭐ UHD     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 📋 Quick Reference Table
+
+| Service | Quality | Format | Bitrate | Extension | Type |
+|:-------:|:-------:|:------:|:-------:|:---------:|:----:|
+| 🌊 Tidal | `HI_RES_LOSSLESS` | FLAC | 24-bit/96kHz+ | `.flac` | Lossless ⭐ |
+| 🌊 Tidal | `LOSSLESS` | FLAC | 16-bit/44.1kHz | `.flac` | Lossless |
+| 🌊 Tidal | `HIGH` | AAC | 320 kbps | `.m4a` | Lossy |
+| 🌊 Tidal | `NORMAL` | AAC | 160 kbps | `.m4a` | Lossy |
+| 🌊 Tidal | `LOW` | AAC | 96 kbps | `.m4a` | Lossy |
+| 🎧 Qobuz | `27` | FLAC | 24-bit/192kHz | `.flac` | Lossless ⭐ |
+| 🎧 Qobuz | `7` | FLAC | 24-bit/96kHz | `.flac` | Lossless |
+| 🎧 Qobuz | `6` | FLAC | 16-bit/44.1kHz | `.flac` | Lossless |
+| 🎧 Qobuz | `5` | MP3 | 320 kbps | `.mp3` | Lossy |
+| 🛒 Amazon | Auto | FLAC | Up to 24-bit/192kHz | `.flac` | Lossless ⭐ |
+
+### 🔄 Service Fallback
 
 If your primary service doesn't have a track, Sexify automatically tries others:
-- `tidal` → `qobuz` → `amazon`
-- `qobuz` → `tidal` → `amazon`
-- `amazon` → `tidal` → `qobuz`
+
+```
+tidal  → qobuz  → amazon
+qobuz  → tidal  → amazon  
+amazon → tidal  → qobuz
+```
 
 ---
 

@@ -55,8 +55,7 @@ def build_expected_filename(
         service=service_name
     )
 
-
-    return sanitize_filename(filename) + ".flac"
+    return sanitize_filename(filename)
 
 def build_folder_path(
     folder_template: str,

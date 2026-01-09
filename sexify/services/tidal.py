@@ -203,24 +203,37 @@ class TidalDownloader:
             progress_mgr.finish()
             log_sub(f"Downloaded: {total_bytes / (1024 * 1024):.2f} MB", 'tidal')
             
-            log_sub("Converting to FLAC...", 'tidal')
-            result = subprocess.run(
-                ["ffmpeg", "-y", "-i", temp_path, "-vn", "-c:a", "copy", output_path],
-                capture_output=True, text=True
-            )
+            # Determine output format based on file extension
+            is_lossy = output_path.endswith('.m4a')
             
-            if result.returncode != 0:
+            if is_lossy:
+                # For lossy (AAC/M4A), just remux without transcoding
+                log_sub("Remuxing to M4A...", 'tidal')
                 result = subprocess.run(
-                    ["ffmpeg", "-y", "-i", temp_path, "-vn", "-c:a", "flac", output_path],
+                    ["ffmpeg", "-y", "-i", temp_path, "-vn", "-c:a", "copy", output_path],
                     capture_output=True, text=True
                 )
+            else:
+                # For lossless, convert to FLAC
+                log_sub("Converting to FLAC...", 'tidal')
+                result = subprocess.run(
+                    ["ffmpeg", "-y", "-i", temp_path, "-vn", "-c:a", "copy", output_path],
+                    capture_output=True, text=True
+                )
+                
+                if result.returncode != 0:
+                    result = subprocess.run(
+                        ["ffmpeg", "-y", "-i", temp_path, "-vn", "-c:a", "flac", output_path],
+                        capture_output=True, text=True
+                    )
             
             if result.returncode != 0:
                 log_error(f"FFmpeg conversion failed", 'tidal')
-                m4a_path = output_path.rsplit('.flac', 1)[0] + '.m4a.tmp'
+                ext = '.m4a' if is_lossy else '.flac'
+                fallback_path = output_path.rsplit(ext, 1)[0] + '.m4a.tmp'
                 try:
-                    os.rename(temp_path, m4a_path)
-                    log_error(f"M4A saved as: {m4a_path}", 'tidal')
+                    os.rename(temp_path, fallback_path)
+                    log_error(f"M4A saved as: {fallback_path}", 'tidal')
                 except Exception:
                     pass
                 return False

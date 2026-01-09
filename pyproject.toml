@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sexify"
-version = "1.0.0"
+version = "1.1.0"
 description = "Lossless. Effortless. 💿 Your Music, Uncompressed. Download Spotify tracks in FLAC via Tidal, Qobuz & Amazon Music."
 authors = ["ManOfInfinity <ManOfInfinity@users.noreply.github.com>"]
 readme = "README.md"
