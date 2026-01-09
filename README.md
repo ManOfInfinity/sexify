@@ -218,44 +218,20 @@ spotify:
 
 </div>
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         🎵 AUDIO QUALITY MATRIX                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  🌊 TIDAL                                                                   │
-│  ├── HI_RES_LOSSLESS  ─────  FLAC 24-bit/96kHz+   ─────  .flac  ⭐ Best    │
-│  ├── LOSSLESS         ─────  FLAC 16-bit/44.1kHz  ─────  .flac  💿 CD      │
-│  ├── HIGH             ─────  AAC  320 kbps        ─────  .m4a              │
-│  ├── NORMAL           ─────  AAC  160 kbps        ─────  .m4a              │
-│  └── LOW              ─────  AAC   96 kbps        ─────  .m4a              │
-│                                                                             │
-│  🎧 QOBUZ                                                                   │
-│  ├── 27               ─────  FLAC 24-bit/192kHz   ─────  .flac  ⭐ Best    │
-│  ├── 7                ─────  FLAC 24-bit/96kHz    ─────  .flac             │
-│  ├── 6                ─────  FLAC 16-bit/44.1kHz  ─────  .flac  💿 CD      │
-│  └── 5                ─────  MP3  320 kbps        ─────  .mp3              │
-│                                                                             │
-│  🛒 AMAZON MUSIC                                                            │
-│  └── Auto             ─────  FLAC 24-bit/192kHz   ─────  .flac  ⭐ UHD     │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+### 📊 Quality & Format Matrix
 
-### 📋 Quick Reference Table
-
-| Service | Quality | Format | Bitrate | Extension | Type |
-|:-------:|:-------:|:------:|:-------:|:---------:|:----:|
-| 🌊 Tidal | `HI_RES_LOSSLESS` | FLAC | 24-bit/96kHz+ | `.flac` | Lossless ⭐ |
-| 🌊 Tidal | `LOSSLESS` | FLAC | 16-bit/44.1kHz | `.flac` | Lossless |
-| 🌊 Tidal | `HIGH` | AAC | 320 kbps | `.m4a` | Lossy |
-| 🌊 Tidal | `NORMAL` | AAC | 160 kbps | `.m4a` | Lossy |
-| 🌊 Tidal | `LOW` | AAC | 96 kbps | `.m4a` | Lossy |
-| 🎧 Qobuz | `27` | FLAC | 24-bit/192kHz | `.flac` | Lossless ⭐ |
-| 🎧 Qobuz | `7` | FLAC | 24-bit/96kHz | `.flac` | Lossless |
-| 🎧 Qobuz | `6` | FLAC | 16-bit/44.1kHz | `.flac` | Lossless |
-| 🎧 Qobuz | `5` | MP3 | 320 kbps | `.mp3` | Lossy |
-| 🛒 Amazon | Auto | FLAC | Up to 24-bit/192kHz | `.flac` | Lossless ⭐ |
+| Service | Option | Quality | Bitrate / Specs | Format | Ext |
+|:---:|:---|:---:|:---|:---:|:---:|
+| **🌊 TIDAL** | `HI_RES_LOSSLESS` | ⭐ **Hi-Res** | 24-bit / 192kHz | **FLAC** | `.flac` |
+| | `LOSSLESS` | 💿 **CD** | 16-bit / 44.1kHz | **FLAC** | `.flac` |
+| | `HIGH` | 🎵 **High** | 320 kbps | **AAC** | `.m4a` |
+| | `NORMAL` | 📉 **Normal** | 160 kbps | **AAC** | `.m4a` |
+| | `LOW` | 📉 **Low** | 96 kbps | **AAC** | `.m4a` |
+| **🎧 QOBUZ** | `27` | ⭐ **Max** | 24-bit / 192kHz | **FLAC** | `.flac` |
+| | `7` | 🎵 **Hi-Res** | 24-bit / 96kHz | **FLAC** | `.flac` |
+| | `6` | 💿 **CD** | 16-bit / 44.1kHz | **FLAC** | `.flac` |
+| | `5` | 📉 **MP3** | 320 kbps | **MP3** | `.mp3` |
+| **🛒 AMAZON**| `Auto` | ⭐ **UHD** | 24-bit / 192kHz | **FLAC** | `.flac` |
 
 ### 🔄 Service Fallback
 
